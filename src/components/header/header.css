@@ -10,7 +10,7 @@
 
 .header-wrapper {
     width: 100%;
-    padding-left: 30px;
+    /* padding-left: 30px; */
     padding-right: 15px;
     display: flex;
     justify-content: space-between;
@@ -166,3 +166,25 @@
 /* select::-ms-expand {
     display: none;
 } */
+
+.header-logo a{
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #F7C942;
+}
+
+.header-logo {
+  -webkit-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.1);
+  box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.1);
+  
+}
+
+.header-logo a img {
+  width: 40px !important;
+  height: 40px !important;
+  margin: 0 auto;
+}

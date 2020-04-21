@@ -6,6 +6,8 @@ import { faSearch, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import './header.css';
 import Groups from '../groups/Groups';
 import useToolbarContext from '../../hooks/useToolbarContext';
+import Logo from '../../assets/logo-svg.svg';
+
 
 
 const Header = () => {
@@ -27,6 +29,11 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-wrapper">
+        <div className="header-logo">
+          <a href="/">
+            <img src={Logo} alt="Logo" />
+          </a>
+        </div>
         <div className="page-title">
           Расписание
         </div>
