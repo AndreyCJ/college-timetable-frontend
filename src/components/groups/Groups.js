@@ -1,43 +1,49 @@
 import React, { useState, useEffect } from 'react';
 
-import useToolbarContext from '../../hooks/useToolbarContext';
+import useGroupContext from '../../hooks/useGroupContext';
 
 const Groups = (props) => {
   const [clicked, setClicked] = useState(false);
-  const [isGroupSet, setGroupIsSet] = useState(false);
-  const { group, setGroup } = useToolbarContext();
+  const [groupRows, setGroupRows] = useState([]);
+  const { currentGroup, setCurrentGroup } = useGroupContext();
+  const [theCurrentGroup, setTheCurrentGroup] = useState('Группа');  
 
-  console.log(group)
+  useEffect(() => {
+    const getGroups = async () => {
+      const response = await fetch('/api/classTimetable/groups');
+      const data = await response.json();
+      const distinctGroups = [...new Set(data.map(group => group.group ))];
+      const copy = [...distinctGroups];
+      setCurrentGroup(copy[0]);
+      setTheCurrentGroup(copy[0])
+      renderGroups(copy);
+    }
+    getGroups();
+  }, []);
 
-  // const [ groups, setGroups ] = useState(["Группа"]);
-  // const [groups] = useState([
-  //   {
-  //     id: 'P43',
-  //     name: 'П-43'
-  //   },
-  //   {
-  //     id: 'R47',
-  //     name: 'Р-47'
-  //   },
-  //   {
-  //     id: '103',
-  //     name: '103'
-  //   }
-  // ]);
+  useEffect(() => {
+    setCurrentGroup(theCurrentGroup)
+  }, [theCurrentGroup]);
 
-  // useEffect(() => {
-  //   setGroupIsSet(true);
-  // }, [group]);
+  const handleSetCurrentGroup = (myGroup) => {
+    setTheCurrentGroup(myGroup);
+  }
 
+  const renderGroups = (copy) => {
+    const rows = copy.map((theGroup, i) => (
+      <li className="header-tooltip__group__item" onClick={() => handleSetCurrentGroup(theGroup)} id={i} key={i}>{theGroup}</li>
+      )
+    );
 
-  
+    setGroupRows(rows);
+  };
 
   const showMenu = () => {
     setClicked(prev => !prev);
   }
 
   const closeMenu = () => {
-    setClicked(false)
+    setClicked(false);
   }
 
   return (
@@ -47,10 +53,10 @@ const Groups = (props) => {
       tabIndex="0"
       onBlur={ closeMenu }
     >
-    <label className="header-tooltip-group__label --ul-label --current">{group[0]}</label>
+    <label className="header-tooltip-group__label --ul-label --current">{theCurrentGroup}</label>
     <ul className={`header-tooltip-group ${clicked ? '--shown' : ''}`}>
       {
-        // isGroupSet ? group.map((theGroup, i) => <li className="header-tooltip__group__item" onClick={setGroup(theGroup)} id={i} key={i}>{theGroup}</li>) : ''
+        groupRows
       }
     </ul>
     </div>

@@ -1,26 +1,33 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-import useToolbarContext from '../../hooks/useToolbarContext';
+import useGroupContext from '../../hooks/useGroupContext';
+import useWeekContext from '../../hooks/useWeekContext';
 
 const ClassTimetable = (props) => {
   const [data, setData] = useState({ classes: [], isFetching: false });
-  const { week, group } = useToolbarContext();
+  const { currentGroup } = useGroupContext();
+  const { week } = useWeekContext();
 
   useEffect(() => {
-    const getClasses = async () => {
-      try {
-        setData({ isFetching: true });
-        const response = await fetch(`/api/classTimetable/${week}&${group}`);
-        const data = await response.json();
-        setData({ classes: data, isFetching: false });
-        console.log(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getClasses();
-  }, [week])
+    if (currentGroup !== 'Группа' && week !== 'undefined') {
+      getClasses(week, currentGroup);
+      console.log(week,currentGroup)
+
+    }
+  }, [week, currentGroup])
+
+  const getClasses = async (theWeek, theGroup) => {
+    try {
+      setData({ isFetching: true });
+      const response = await fetch(`/api/classTimetable/${theWeek}&${theGroup}`);
+      const data = await response.json();
+      setData({ classes: data, isFetching: false });
+      // console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getTables = classes => {
     let tRows = [];

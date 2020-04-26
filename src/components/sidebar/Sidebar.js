@@ -6,7 +6,7 @@ import { faTable, faBell, faPrint } from '@fortawesome/free-solid-svg-icons';
 import './Sidebar.css';
 
 const Sidebar = ({ history }) => {
-  const currentPageClass = 'sidebar-pages__item--selected';
+  // const currentPageClass = 'sidebar-pages__item--selected';
   let timeTablePage, callsPage = '';
 
   // switch (history.location.pathname) {

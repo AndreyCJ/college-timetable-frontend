@@ -212,14 +212,6 @@ tbody tr td {
       overflow-wrap: break-word;
     }
 
-    .sidebar-wrapper {
-      display: none;
-    }
-
-    .page-title {
-      display: none;
-    }
-
     .number {
       min-width: 20px !important;
       font-size: 0.7rem

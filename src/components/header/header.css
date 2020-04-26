@@ -21,6 +21,7 @@
     display: flex;
     justify-content: center;
     align-items:center;
+    font-weight: 600;
 }
 
 .header-tooltip-group-wrapper {
@@ -42,11 +43,12 @@
 }
 
 .header ul {
-    width: 100%;
+    /* width: 100%; */
+    overflow: hidden;
     list-style: none;
     position: absolute;
     top: 55px;
-    left: 0;
+    right: 0;
     background: #f8f8f8;
     font-size: 0.9rem;
     display: block;
@@ -74,6 +76,7 @@
 
 .page-title {
     font-weight: 600;
+    padding-left: 30px;
 }
 
 .header-tooltip__button {
@@ -91,6 +94,13 @@
 
 .sidebar-logo img{
     width: 40px;
+}
+
+.header-bar-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
 }
 
 .--ul-label {
@@ -187,4 +197,19 @@
   width: 40px !important;
   height: 40px !important;
   margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .header-tooltip {
+    display: none;
+  }
+
+  .page-title {
+    font-size: 0.8rem;
+    padding-left: 15px;
+  }
+
+  .header-logo {
+    box-shadow: none;
+  }
 }
