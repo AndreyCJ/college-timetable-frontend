@@ -27,6 +27,20 @@ const PageContainer = (props) => {
   ]);
 
   const [title, setTitle] = useState('Расписание уроков');
+  const [isGroupSelected, setSelected] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('currentGroup') !== null) {
+      setSelected(true);
+      if (window.location.pathname === '/') {
+        window.location.pathname = '/class-timetable';
+      }
+    } else if(localStorage.getItem('currentGroup') === null) {
+      if (window.location.pathname !== '/') {
+        window.location.pathname = '/';
+      }
+    }
+  }, [])
 
   const location = useLocation();
   useEffect(
@@ -38,6 +52,33 @@ const PageContainer = (props) => {
     [location]
   );
 
+  const renderAllPages = () => {
+    return pages.map(( { component: C, path }, i ) => {
+        return <Route
+        exact
+        key={i}
+        path={path}
+        render={(props) => <C {...props} />
+        }
+      />
+    });
+  };
+
+  const renderWithoutEntryPage = () => {
+    return pages.filter(({path}) => {
+      if (path === '/') return false;
+      return true;
+    })
+    .map(( { component: C, path }, i ) => {
+        return <Route
+        exact
+        key={i}
+        path={path}
+        render={(props) => <C {...props} />
+        }
+      />
+    })
+  }
 
   return (
     <div className="wrapper">
@@ -47,14 +88,7 @@ const PageContainer = (props) => {
         <div className="main">
 
           {
-            pages.map(( { component: C, path }, i ) => {
-              return <Route
-                exact
-                key={i}
-                path={path}
-                render={(props) => <C {...props} />}
-              />
-            })
+            isGroupSelected ? renderWithoutEntryPage() : renderAllPages()
           }
         </div>
       </div>

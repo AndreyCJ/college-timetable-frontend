@@ -16,7 +16,7 @@ const Header = (props) => {
     <header className="header">
       <div className="header-wrapper">
         <div className="header-logo">
-          <a href="/">
+          <a href="/class-timetable">
             <img src={Logo} alt="Logo" />
           </a>
         </div>
@@ -28,11 +28,11 @@ const Header = (props) => {
           <div className="header-tooltip">
             <Weeks />
             <Groups />
-            <div className="header-tooltip__item header-tooltip__search">
+            {/* <div className="header-tooltip__item header-tooltip__search">
               <button className="header-tooltip__button">
                 <FontAwesomeIcon icon={faSearch} />
               </button>
-            </div>
+            </div> */}
             {/* <div className="header-tooltip__item header-tooltip__account-nav">
               <button className="header-tooltip__button">
                 <FontAwesomeIcon icon={faUser} />

@@ -5,6 +5,7 @@ import './app.css';
 
 import { WeekProvider } from '../../context/WeekContext';
 import { GroupProvider } from '../../context/GroupsContext';
+import { AllGroupsProvider } from '../../context/AllGroupsContext';
 
 import PageContainer from '../pageContainer/pageContainer';
 
@@ -13,7 +14,9 @@ const App = (props) => {
       <Router>
         <GroupProvider>
           <WeekProvider>
-            <PageContainer />
+            <AllGroupsProvider>
+              <PageContainer />
+            </AllGroupsProvider>
           </WeekProvider>
         </GroupProvider>
       </Router>

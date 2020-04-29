@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import useGroupContext from '../../hooks/useGroupContext';
 import useWeekContext from '../../hooks/useWeekContext';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
+
 const ClassTimetable = (props) => {
   const [data, setData] = useState({ classes: [], isFetching: false });
   const { currentGroup } = useGroupContext();
@@ -40,19 +43,19 @@ const ClassTimetable = (props) => {
 
     classes.map(classData => {
       if (classData.day === 'Понедельник'){
-        monday[classData.classNum - 1] = classData.className;
+        monday[classData.classNum - 1] = [classData.className, classData.classTime, classData.room];
       } 
       else if (classData.day === 'Вторник') {
-        tuesday[classData.classNum - 1] = classData.className;
+        tuesday[classData.classNum - 1] = [classData.className, classData.classTime, classData.room];
       }
       else if (classData.day === 'Среда') {
-        wednesday[classData.classNum - 1] = classData.className;
+        wednesday[classData.classNum - 1] = [classData.className, classData.classTime, classData.room];
       }
       else if (classData.day === 'Четверг') {
-        thursday[classData.classNum - 1] = classData.className;
+        thursday[classData.classNum - 1] = [classData.className, classData.classTime, classData.room];
       }
       else if (classData.day === 'Пятница') {
-        friday[classData.classNum - 1] = classData.className;
+        friday[classData.classNum - 1] = [classData.className, classData.classTime, classData.room];
       }
       return true;
     });
@@ -68,12 +71,25 @@ const ClassTimetable = (props) => {
       tRows.push(
         <tr key={i}>
           {<td className="number" key={i+1}>{i+1}</td>}
+          {/* {console.log(classData[i])} */}
           {classData[i].map((lesson, i) => {
-            return (
-              <td className="timetables-page__lesson-wrapper" key={i+10}>
-                <div className={`${typeof(lesson) !== 'undefined' ? 'timetables-page__lesson' : ''}`}>{lesson}</div>
-              </td>
-            );
+            if (typeof(lesson) !== 'undefined') {
+              return (
+                <td className="timetables-page__lesson-wrapper" key={i+10}>
+                  <div className="timetables-page__lesson">
+                    <div>
+                      <div className="className">{lesson[0]}</div>
+                      {
+                        typeof(lesson[1]) !== 'undefined' &&
+                        <div className="classTime"><FontAwesomeIcon icon={faBell}/>{lesson[1]}, каб. №{lesson[2]}</div>
+                      }
+                    </div>
+                  </div>
+                </td>
+              );
+            } else {
+              return <td className="timetables-page__lesson-wrapper" key={i+10}></td>
+            }
           })}
         </tr>
       );
