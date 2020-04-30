@@ -5,7 +5,7 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import useWeekContext from '../../hooks/useWeekContext';
 
 const Weeks = (props) => {
-  const { week } = useWeekContext();
+  const { week, setWeek } = useWeekContext();
   const [clickedClass, setClickedClass] = useState(false);
   const [currentWeek, setCurrentWeek] = useState('Четная')
 
@@ -13,10 +13,6 @@ const Weeks = (props) => {
     const theWeek = week;
     setCurrentWeek(theWeek)
   }, [week]);
-
-  // useEffect(() => {
-  //   setWeek(currentWeek);
-  // }, [currentWeek])
 
   const showMenu = () => {
     setClickedClass(prev => !prev);
@@ -27,6 +23,7 @@ const Weeks = (props) => {
   }
 
   const selectWeek = (theWeek) => {
+    setWeek(theWeek);
     setCurrentWeek(theWeek)
   }
 

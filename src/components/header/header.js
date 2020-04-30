@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
@@ -6,10 +6,29 @@ import './header.css';
 import Groups from '../groups/Groups';
 import Logo from '../../assets/logo-svg.svg';
 import Weeks from '../weeks/Weeks';
+import MobileMenuToggleBtn from '../mobileMenu/mobileMenuToggleBtn';
+import MobileMenu from '../mobileMenu/mobileMenu';
+import Backdrop from '../backdrop/backdrop';
 
 
 
 const Header = (props) => {
+  const [menuState, setMenuState] = useState({
+    isMenuOpen: false,
+    shadow: 'no-shadow'
+  });
+
+  const handleMenuBtnClick = () => {
+    setMenuState(
+      (prevState) => {
+        return {isMenuOpen: !prevState.isMenuOpen};
+      }
+    );
+  };
+
+  const handleBackdropClick = () => {
+    setMenuState({isMenuOpen: false});
+  };
   
   return (
     <header className="header">
@@ -19,27 +38,23 @@ const Header = (props) => {
             <img src={Logo} alt="Logo" />
           </a>
         </div>
-        <div className="header-bar-wrapper">
-          <div className="page-title">
-            {props.title}
-          </div>
+          <div className="header-bar-wrapper">
+            <div className="page-title">
+              {props.title}
+            </div>
 
-          <div className="header-tooltip">
-            <Weeks />
-            <Groups />
-            {/* <div className="header-tooltip__item header-tooltip__search">
-              <button className="header-tooltip__button">
-                <FontAwesomeIcon icon={faSearch} />
-              </button>
-            </div> */}
-            {/* <div className="header-tooltip__item header-tooltip__account-nav">
-              <button className="header-tooltip__button">
-                <FontAwesomeIcon icon={faUser} />
-              </button>
-            </div> */}
+            <div className="header-tooltip">
+              <Weeks />
+              <Groups />
+            </div>
           </div>
-        </div>
+        
       </div>
+      <div className="mobileMenu-wrapper">
+          <MobileMenuToggleBtn click={handleMenuBtnClick}/>
+          <MobileMenu show={menuState.isMenuOpen} weeks={<Weeks />} groups={<Groups />} />
+          <Backdrop click={handleBackdropClick} show={menuState.isMenuOpen} />
+        </div>
     </header>
   );
 };

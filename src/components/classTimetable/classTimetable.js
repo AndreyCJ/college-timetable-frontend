@@ -96,7 +96,8 @@ const ClassTimetable = (props) => {
   };
 
   const renderTable = classes => {
-    return (
+    return classes.length === 0 ? <div className="blank-timetable"><span>Расписания нет...</span></div> : 
+    (
       <table>
         <thead>
           <tr>
@@ -119,7 +120,6 @@ const ClassTimetable = (props) => {
             <td className="fake-col"></td>
             <td className="fake-col"></td>
           </tr>
-
         </tbody>
       </table>
     );

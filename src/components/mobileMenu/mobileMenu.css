@@ -1,0 +1,78 @@
+.mobileMenu {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70vw;
+    max-width: 400px;
+    background: #f8f8f8;
+    z-index: 20;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-out;
+}
+
+.header-logo {
+  background: #F7C942;
+}
+
+.toolbar__item {
+  background: rgba(247, 202, 66, 0.807);
+
+}
+
+.toolbar__item .select-wrapper {
+  height: 40px !important;
+}
+
+.toolbar__item .select-wrapper ul {
+  width: 100%;
+  top: 40px !important;
+}
+
+.toolbar__item .select-wrapper ul li {
+  font-size: 0.9rem;
+}
+
+.toolbar__item label{
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.mobileMenu.open {
+    transform: translateX(0);
+}
+
+.mobileMenu-ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+    flex-direction: column;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-top: 30px;
+}
+
+.mobileMenu-ul .headerNavItem__mobile {
+    margin-bottom: 1rem;
+}
+
+.mobileMenu a {
+    text-decoration: none;
+    color: #1B1B1C;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.mobileMenu a:hover,
+.mobileMenu a:active {
+    color: rgb(75, 95, 211);;
+}
+
+.mobileLogo {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    padding: 20px;
+}
