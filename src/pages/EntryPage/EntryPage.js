@@ -1,15 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import useGroupContext from '../../hooks/useGroupContext';
 import useAllGroupsContext from '../../hooks/useAllGroupsContext';
 
 import './EntryPage.css';
 
-const EntryPage = () => {
+const EntryPage = (props) => {
   const { setCurrentGroup } = useGroupContext();
   const { groups } = useAllGroupsContext();
   const [ selectedGroup, setSelectedGroup ] = useState('');
   const [ errorMessageClass, setErrorMessageClass ] = useState('');
   const [ submitDisabled, setSubmitDisabled ] = useState(false);
+  const [ isFetching, setIsFetching ] = useState(false);
+
+  useEffect(() => {
+    // if (localStorage.getItem('currentGroup') !== null) {
+    //   return <Redirect to='/class-timetable'/>
+    // }
+    setIsFetching(true);
+  }, []);
+
+  useEffect(() => {
+    if (groups !== 'Группы') {
+      setIsFetching(false);
+    }
+  }, [groups]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,8 +38,8 @@ const EntryPage = () => {
     } else {
       setCurrentGroup(selectedGroup);
       localStorage.setItem('currentGroup', selectedGroup);
-      console.log(selectedGroup);
-      window.location.pathname = '/class-timetable';
+      // console.log(selectedGroup);
+      props.history.push('/class-timetable');
     }
   };
 
@@ -32,24 +47,33 @@ const EntryPage = () => {
     setSelectedGroup(e.target.value);
   }
 
-  useEffect(() => {
-    console.log(groups)
-  }, [groups])
+  const loader = () => {
+    return (
+      <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    );
+  };
 
   return (
     <div className="entryPage-wrapper">
-      <form>
-        <div className="entryPage-groups-wrapper">
-          {
-            groups !== 'Группы' && groups.map((group, i) => (
-              <div key={i - 500}>
-                <input key={i} checked={selectedGroup === group} onChange={handeCurrentGroupChange} value={group} type="radio" name="Group" /> <label key={i+200}>{group}</label>
-              </div>
-            ))
-          }
-        </div>
-        <button className="submit-btn" disabled={submitDisabled} type="submit" onClick={(e) => handleSubmit(e)}>Выбрать</button>
-      </form>
+      {localStorage.getItem('currentGroup') !== null && <Redirect to='/class-timetable'/>}
+      {isFetching ? loader() :
+       <div className="form-wrapper">
+        <form>
+          <p>Выберите группу:</p>
+          <div className="entryPage-groups-wrapper">
+            {
+              groups !== 'Группы' && groups.map((group, i) => (
+                <label key={i+200}>
+                  {group}
+                  <input key={i} checked={selectedGroup === group} onChange={handeCurrentGroupChange} value={group} type="radio" name="Group" />
+                  <span className="checkmark"></span>
+                </label>
+              ))
+            }
+          </div>
+          <button className="submit-btn" disabled={submitDisabled} type="submit" onClick={(e) => handleSubmit(e)}>Выбрать</button>
+        </form>
+      </div>}
       {<div className={`snackbar ${errorMessageClass}`}>Выберите группу</div>}
     </div>
   );

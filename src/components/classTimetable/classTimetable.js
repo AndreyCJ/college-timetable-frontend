@@ -15,10 +15,9 @@ const ClassTimetable = (props) => {
   useEffect(() => {
     if (currentGroup !== 'Группа' && week !== 'undefined') {
       getClasses(week, currentGroup);
-      console.log(week,currentGroup)
-
+      // console.log(week,currentGroup)
     }
-  }, [week, currentGroup])
+  }, [week, currentGroup]);
 
   const getClasses = async (theWeek, theGroup) => {
     try {
@@ -71,7 +70,6 @@ const ClassTimetable = (props) => {
       tRows.push(
         <tr key={i}>
           {<td className="number" key={i+1}>{i+1}</td>}
-          {/* {console.log(classData[i])} */}
           {classData[i].map((lesson, i) => {
             if (typeof(lesson) !== 'undefined') {
               return (

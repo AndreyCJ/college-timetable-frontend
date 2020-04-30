@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, useLocation } from 'react-router-dom';
+import { Route, useLocation, Redirect } from 'react-router-dom';
 
 import Header from '../header/header';
 import Sidebar from '../sidebar/Sidebar';
@@ -27,20 +27,20 @@ const PageContainer = (props) => {
   ]);
 
   const [title, setTitle] = useState('Расписание уроков');
-  const [isGroupSelected, setSelected] = useState(false);
+  // const [isGroupSelected, setSelected] = useState(false);
 
-  useEffect(() => {
-    if (localStorage.getItem('currentGroup') !== null) {
-      setSelected(true);
-      if (window.location.pathname === '/') {
-        window.location.pathname = '/class-timetable';
-      }
-    } else if(localStorage.getItem('currentGroup') === null) {
-      if (window.location.pathname !== '/') {
-        window.location.pathname = '/';
-      }
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (localStorage.getItem('currentGroup') !== null) {
+  //     setSelected(true);
+  //     if (window.location.pathname === '/') {
+  //       window.location.pathname = '/class-timetable';
+  //     }
+  //   } else if(localStorage.getItem('currentGroup') === null) {
+  //     if (window.location.pathname !== '/') {
+  //       window.location.pathname = '/';
+  //     }
+  //   }
+  // }, [])
 
   const location = useLocation();
   useEffect(
@@ -49,36 +49,40 @@ const PageContainer = (props) => {
       pages.forEach(page => page.path === location.pathname ? title = page.title : false);
       setTitle(title);
     },
-    [location]
+    [location, pages]
   );
 
-  const renderAllPages = () => {
-    return pages.map(( { component: C, path }, i ) => {
-        return <Route
-        exact
-        key={i}
-        path={path}
-        render={(props) => <C {...props} />
-        }
-      />
-    });
-  };
+  // const renderAllPages = () => {
+  //   return pages.map(( { component: C, path }, i ) => {
+  //       return <Route
+  //       exact
+  //       key={i}
+  //       path={path}
+  //       render={(props) => <C {...props} />
+  //       }
+  //     />
+  //   });
+  // };
 
-  const renderWithoutEntryPage = () => {
-    return pages.filter(({path}) => {
-      if (path === '/') return false;
-      return true;
-    })
-    .map(( { component: C, path }, i ) => {
-        return <Route
-        exact
-        key={i}
-        path={path}
-        render={(props) => <C {...props} />
-        }
-      />
-    })
-  }
+  // const renderWithoutEntryPage = () => {
+  //   return pages.filter(({path}) => {
+  //     if (path === '/') return false;
+  //     return true;
+  //   })
+  //   .map(( { component: C, path }, i ) => {
+  //       return <Route
+  //       exact
+  //       key={i}
+  //       path={path}
+  //       render={(props) => <C {...props} />
+  //       }
+  //     />
+  //   })
+  // }
+  //  isGroupSelected ? renderWithoutEntryPage() : renderAllPages()
+  // {localStorage.getItem('currentGroup') !== null && <Redirect to='/class-timetable'/>}
+
+
 
   return (
     <div className="wrapper">
@@ -86,10 +90,10 @@ const PageContainer = (props) => {
       <div className="main-content-wrapper">
         <Sidebar />
         <div className="main">
-
-          {
-            isGroupSelected ? renderWithoutEntryPage() : renderAllPages()
-          }
+          {localStorage.getItem('currentGroup') === null && <Redirect to='/'/>}
+          <Route exact path='/' render={(props) => <EntryPage {...props} />} />
+          <Route exact path='/class-timetable' render={(props) => <TimetablesPage {...props} />} />
+          <Route exact path='/calls' render={(props) => <CallsPage {...props} />} />
         </div>
       </div>
     </div>

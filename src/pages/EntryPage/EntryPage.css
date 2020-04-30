@@ -8,42 +8,126 @@
 }
 
 .entryPage-groups-wrapper {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
-.entryPage-wrapper form{
-  width: 100%;
+.entryPage-wrapper .form-wrapper{
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 45px 15px;
+  background: rgba(225, 235, 250, 0.208);
+  border: 2px solid rgba(214, 214, 214, 0.555);
   flex-direction: column;
+  border-radius: .5rem;
+  color: #333333;
 }
 
-.entryPage-groups-wrapper div {
-  margin-bottom: 0.5rem;
+.entryPage-wrapper form {
+  max-width: 300px;
+  width: 100%;
+  display: block;
+}
+
+.entryPage-wrapper form p {
+  margin-bottom: 2rem;
   font-size: 1.2rem;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  font-weight: 600;
 }
 
-.entryPage-groups-wrapper div input {
-  width: 1.5rem;
+.entryPage-groups-wrapper label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.entryPage-groups-wrapper label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  height: 21px;
+  width: 21px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.entryPage-groups-wrapper label input:checked ~ .checkmark {
+  background-color: #4b5fd3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.entryPage-groups-wrapper label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.entryPage-groups-wrapper label .checkmark:after {
+  top: 8px;
+  left: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: white;
 }
 
 .submit-btn {
   display: flex;
   justify-content: center;
+  text-align: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #4b5fd3;
   display: block;
-  padding: .2rem .5rem;
+  padding: .4rem .5rem;
   border: 2px solid #4b5fd3;
   border-radius: .5rem;
   background: transparent;
   cursor: pointer;
   text-align: center;
+  font-weight: 600;
+}
+
+.submit-btn:disabled, .submit-btn:disabled:hover {
+  cursor: default;
+  background: transparent;
+  color: #4b5fd3;
+}
+
+.submit-btn:hover {
+  background: #4b5fd3;
+  color: white;
 }
 
 .snackbar {

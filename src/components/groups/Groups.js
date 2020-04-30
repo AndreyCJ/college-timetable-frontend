@@ -7,8 +7,7 @@ const Groups = (props) => {
   const [clicked, setClicked] = useState(false);
   const [groupRows, setGroupRows] = useState([]);
   const { currentGroup, setCurrentGroup } = useGroupContext();
-  const { groups, setAllGroups } = useAllGroupsContext();
-  // const [theCurrentGroup, setTheCurrentGroup] = useState('Группа');  
+  const { setAllGroups } = useAllGroupsContext();
 
   useEffect(() => {
     setCurrentGroup(localStorage.getItem('currentGroup'));
@@ -17,18 +16,12 @@ const Groups = (props) => {
       const data = await response.json();
       const distinctGroups = [...new Set(data.map(group => group.group ))];
       const copy = [...distinctGroups];
-      // setCurrentGroup(copy[0]);
-      // setTheCurrentGroup(copy[0])
       setAllGroups(copy);
       renderGroups(copy);
     }
     getGroups();
-    console.log(currentGroup)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   setCurrentGroup(theCurrentGroup)
-  // }, [theCurrentGroup]);
 
   const handleSetCurrentGroup = (myGroup) => {
     // setTheCurrentGroup(myGroup);
@@ -41,7 +34,6 @@ const Groups = (props) => {
       <li className="header-tooltip__group__item" onClick={() => handleSetCurrentGroup(theGroup)} id={i} key={i}>{theGroup}</li>
       )
     );
-
     setGroupRows(rows);
   };
 
@@ -72,7 +64,7 @@ const Groups = (props) => {
   };
 
   return (
-    <span>{currentGroup === 'Группа' && currentGroup === 'undefined' ? '' : renderGroupBox()}</span>
+    <span>{currentGroup === null ? '' : renderGroupBox()}</span>
   );
 };
 
