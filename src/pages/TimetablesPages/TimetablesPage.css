@@ -1,4 +1,4 @@
-table {
+.timetables-page table {
     border-collapse: collapse;
     letter-spacing: 1px;
     font-size: 0.8rem;
@@ -9,15 +9,14 @@ table {
     height: 100%;
 }
 
-td, th {
+.timetables-page td, .timetables-page th {
     padding: 10px;
     border-top: none ;
     border: 1px solid #d8d8d8;
-    background: #fff;
     letter-spacing: 0.5px !important;
 }
 
-th {
+.timetables-page th {
     border-top: none;
     height: 30px;
     padding: 0;
@@ -25,13 +24,12 @@ th {
     font-weight: 300;   
 }
 
-td {
+.timetables-page td {
     text-align: center;
     /* box-shadow:0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048); */
 }
 
-
-tbody tr td {
+.timetables-page tbody tr td {
     height: 80px !important ;
 }
 
@@ -268,20 +266,36 @@ s-roller div:nth-child(3) {
   }
 }
 
+@media (max-width: 1250px) {
+  .timetables-page__lesson .className {
+    font-size: 0.8rem;
+    overflow-wrap: break-word;
+  }
+}
+
+@media (max-width: 900px) {
+  .timetables-page__lesson .className {
+    font-size: 0.7rem;
+  }
+}
+
 @media (max-width: 768px) {
-    table {
-      
+    .timetables-page table {
       display: block;
       overflow-x: auto;
       white-space: nowrap;
       width: 100%;
     }
 
-    tr {
+    .timetables-page__lesson .className {
+      font-size: 0.9rem;
+    }
+
+    .timetables-page tr {
       height: 100%;
     }
 
-    tr td:nth-child(2) {
+    .timetables-page tr td:nth-child(2) {
       min-width: calc(100vw - 20px) !important;
     }
 
@@ -307,10 +321,8 @@ s-roller div:nth-child(3) {
     }
 }
 
-/* @media (max-width: 425px) {
-
-  td, th {
-    min-width: 100vw;
+@media (max-width: 425px) {
+  .timetables-page__lesson .className {
+    font-size: 0.8rem;
   }
-
-} */
+}

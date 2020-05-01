@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,13 +10,19 @@ import MobileMenuToggleBtn from '../mobileMenu/mobileMenuToggleBtn';
 import MobileMenu from '../mobileMenu/mobileMenu';
 import Backdrop from '../backdrop/backdrop';
 
-
+import useGroupContext from '../../hooks/useGroupContext';
+import useAllGroupsContext from '../../hooks/useAllGroupsContext';
+import useWeekContext from '../../hooks/useWeekContext';
 
 const Header = (props) => {
   const [menuState, setMenuState] = useState({
     isMenuOpen: false,
     shadow: 'no-shadow'
   });
+
+  const { setAllGroups } = useAllGroupsContext();
+  const { setCurrentGroup } = useGroupContext();
+  const { setWeek } = useWeekContext();
 
   const handleMenuBtnClick = () => {
     setMenuState(
@@ -25,6 +31,29 @@ const Header = (props) => {
       }
     );
   };
+  
+  useEffect(() => {
+    setCurrentGroup(localStorage.getItem('currentGroup'));
+    const getGroups = async () => {
+      const response = await fetch('/api/classTimetable/groups');
+      const data = await response.json();
+      const distinctGroups = [...new Set(data.map(group => group.group ))];
+      const copy = [...distinctGroups];
+      console.log(data);
+      setAllGroups(copy);
+    };
+
+    const getWeek = async () => {
+      const response = await fetch('/api/week');
+      const data = await response.json();
+      setWeek(data);
+      console.log(data);
+    };
+
+    getGroups();
+    getWeek();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleBackdropClick = () => {
     setMenuState({isMenuOpen: false});

@@ -7,27 +7,18 @@ const Groups = (props) => {
   const [clicked, setClicked] = useState(false);
   const [groupRows, setGroupRows] = useState([]);
   const { currentGroup, setCurrentGroup } = useGroupContext();
-  const { setAllGroups } = useAllGroupsContext();
+  const { groups } = useAllGroupsContext();
 
   useEffect(() => {
-    setCurrentGroup(localStorage.getItem('currentGroup'));
-    const getGroups = async () => {
-      const response = await fetch('/api/classTimetable/groups');
-      const data = await response.json();
-      const distinctGroups = [...new Set(data.map(group => group.group ))];
-      const copy = [...distinctGroups];
-      setAllGroups(copy);
-      renderGroups(copy);
-    }
-    getGroups();
+    const copy = [...groups];
+    renderGroups(copy);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [groups])
 
   const handleSetCurrentGroup = (myGroup) => {
-    // setTheCurrentGroup(myGroup);
     setCurrentGroup(myGroup)
     localStorage.setItem('currentGroup', myGroup);
-  }
+  };
 
   const renderGroups = (copy) => {
     const rows = copy.map((theGroup, i) => (
@@ -39,11 +30,11 @@ const Groups = (props) => {
 
   const showMenu = () => {
     setClicked(prev => !prev);
-  }
+  };
 
   const closeMenu = () => {
     setClicked(false);
-  }
+  };
 
   const renderGroupBox = () => {
     return (

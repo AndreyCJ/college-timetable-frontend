@@ -13,7 +13,7 @@ const ClassTimetable = (props) => {
   const { week } = useWeekContext();
 
   useEffect(() => {
-    if (currentGroup !== 'Группа' && week !== 'undefined') {
+    if (currentGroup !== 'Группа' && week !== '') {
       getClasses(week, currentGroup);
       // console.log(week,currentGroup)
     }

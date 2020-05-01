@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTable, faBell, faPrint } from '@fortawesome/free-solid-svg-icons';
+import { faTable, faBell } from '@fortawesome/free-solid-svg-icons';
 
 import './Sidebar.css';
 
@@ -44,11 +44,11 @@ const Sidebar = ({ history }) => {
               <FontAwesomeIcon icon={faBell} />
             </a>
           </div>
-          <div className="sidebar-pages__item">
+          {/* <div className="sidebar-pages__item">
             <a href="/">
               <FontAwesomeIcon icon={faPrint} />
             </a>
-          </div>
+          </div> */}
         </div>
 
         <div className="sidebar-spacer" />

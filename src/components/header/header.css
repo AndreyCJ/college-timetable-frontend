@@ -210,16 +210,14 @@
   }
 
   .page-title {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     padding-left: 15px;
   }
 
   .header-logo {
     box-shadow: none;
   }
-}
 
-@media (max-width: 460px) {
   .mobileMenu-wrapper{
     display: block;
   } 
