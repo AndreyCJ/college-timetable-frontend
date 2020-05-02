@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 import useGroupContext from '../../hooks/useGroupContext';
 import useAllGroupsContext from '../../hooks/useAllGroupsContext';
@@ -44,7 +46,7 @@ const Groups = (props) => {
         tabIndex="0"
         onBlur={ closeMenu }
       >
-      <label className="header-tooltip-group__label --ul-label --current">{currentGroup}</label>
+      <label className="header-tooltip-group__label --ul-label --current">{currentGroup} <FontAwesomeIcon icon={faCaretDown} /></label>
       <ul className={`header-tooltip-group ${clicked ? '--shown' : ''}`}>
         {
           groupRows

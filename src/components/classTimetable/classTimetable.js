@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 const ClassTimetable = (props) => {
-  const [data, setData] = useState({ classes: [], isFetching: false });
+  const [data, setData] = useState({ classes: [], isFetching: true });
   const { currentGroup } = useGroupContext();
   const { week } = useWeekContext();
 
@@ -24,7 +24,8 @@ const ClassTimetable = (props) => {
       setData({ isFetching: true });
       const response = await fetch(`/api/classTimetable/${theWeek}&${theGroup}`);
       const data = await response.json();
-      setData({ classes: data, isFetching: false });
+      const copy = [...data]
+      setData({ classes: copy, isFetching: false });
       // console.log(data);
     } catch (err) {
       console.log(err);
@@ -96,33 +97,36 @@ const ClassTimetable = (props) => {
   };
 
   const renderTable = classes => {
-    return classes.length === 0 ? <div className="blank-timetable"><span>Расписания нет...</span></div> : 
-    (
-      <table>
-        <thead>
-          <tr>
-            <th className="number">№</th>
-            <th>Понедельник</th>
-            <th>Вторник</th>
-            <th>Среда</th>
-            <th>Четверг</th>
-            <th>Пятница</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {getTables(classes)}
-          <tr className="fake-row">
-            <td className="fake-col fake-col-num"></td>
-            <td className="fake-col"></td>
-            <td className="fake-col"></td>
-            <td className="fake-col"></td>
-            <td className="fake-col"></td>
-            <td className="fake-col"></td>
-          </tr>
-        </tbody>
-      </table>
-    );
+    if (data.isFetching === false && classes.length === 0) {
+      return <div className="blank-timetable"><span>Расписания нет...</span></div>;
+    } else {
+      return (
+        <table>
+          <thead>
+            <tr>
+              <th className="number">№</th>
+              <th>Понедельник</th>
+              <th>Вторник</th>
+              <th>Среда</th>
+              <th>Четверг</th>
+              <th>Пятница</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            {getTables(classes)}
+            <tr className="fake-row">
+              <td className="fake-col fake-col-num"></td>
+              <td className="fake-col"></td>
+              <td className="fake-col"></td>
+              <td className="fake-col"></td>
+              <td className="fake-col"></td>
+              <td className="fake-col"></td>
+            </tr>
+          </tbody>
+        </table>
+      );
+    }
   };
 
   const loader = () => {
