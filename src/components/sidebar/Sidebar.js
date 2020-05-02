@@ -1,59 +1,44 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { withRouter, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTable, faBell } from '@fortawesome/free-solid-svg-icons';
 
 import './Sidebar.css';
 
-const Sidebar = ({ history }) => {
-  // const currentPageClass = 'sidebar-pages__item--selected';
-  let timeTablePage, callsPage = '';
-
-  // switch (history.location.pathname) {
-  //   case '/':
-  //     timeTablePage = currentPageClass;
-  //     callsPage = '';
-  //     break;
-  //   case '/calls':
-  //     callsPage = currentPageClass;
-  //     timeTablePage = '';
-  //     break;
-  //   default:
-  //     timeTablePage = currentPageClass;
-  //     callsPage = '';
-  //     break;
-  // }
+const Sidebar = (props) => {
+  const [ isSidebarOpen, setSidebarOpen ] = useState(false);
+  const handleSidebarToggle = () => {
+    setSidebarOpen((prev) => !prev);
+  }
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isSidebarOpen ? '--sidebar-open' : '--sidebar-closed'}`}>
       <div className="sidebar-wrapper">
-        {/* <div className="sidebar-logo">
-          <a href="/">
-            <img src={Logo} alt="Logo" />
-          </a>
-        </div> */}
 
         <div className="sidebar-pages">
-          <div className={`sidebar-pages__item ${timeTablePage}`}>
-            <a href="/class-timetable">
+          <div className={`sidebar-pages__item ${isSidebarOpen ? '--sidebar-open' : '--sidebar-closed'}`}>
+            <NavLink
+              to={localStorage.getItem('currentGroup') === null ? '/' : '/class-timetable'}
+              activeClassName={localStorage.getItem('currentGroup') === null ? '' : 'sidebar-pages__item--selected'}
+            >
               <FontAwesomeIcon icon={faTable} />
-            </a>
+              <span className={`sidebar-text ${isSidebarOpen ? '--sidebar-open' : '--sidebar-closed'}`}>Расписание уроков</span>
+            </NavLink>
           </div>
-          <div className={`sidebar-pages__item ${callsPage}`}>
-            <a href="/calls">
+          <div className={`sidebar-pages__item ${isSidebarOpen ? '--sidebar-open' : '--sidebar-closed'}`}>
+            <NavLink
+              to={localStorage.getItem('currentGroup') === null ? '/' : '/calls'}
+              activeClassName={localStorage.getItem('currentGroup') === null ? '' : 'sidebar-pages__item--selected'}
+            >
               <FontAwesomeIcon icon={faBell} />
-            </a>
+              <span className={`sidebar-text ${isSidebarOpen ? '--sidebar-open' : '--sidebar-closed'}`}>Расписание звонков</span>
+            </NavLink>
           </div>
-          {/* <div className="sidebar-pages__item">
-            <a href="/">
-              <FontAwesomeIcon icon={faPrint} />
-            </a>
-          </div> */}
         </div>
 
         <div className="sidebar-spacer" />
 
-        <div className="sidebar-toggle">
+        <div className={`sidebar-toggle ${isSidebarOpen ? '--sidebar-open' : '--sidebar-closed'}`} onClick={handleSidebarToggle}>
           <button className="sidebar-toggle__button">
             <div className="sidebar-toggle__button__line" />
             <div className="sidebar-toggle__button__line" />

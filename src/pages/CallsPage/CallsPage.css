@@ -104,9 +104,9 @@
   content: '';
   display: block;
   height: 4px;
-  width: 150px;
-  left: calc(50% - 75px);
-  bottom: 10;
+  width: 100px;
+  left: calc(50% - 50px);
+  bottom: -1.2rem;
 
   background: #F7C942;
   position: absolute;

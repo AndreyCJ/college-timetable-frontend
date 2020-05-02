@@ -42,7 +42,7 @@ const CallsPage = () => {
     const theCallsInfo = data.callsInfo.length === 0 ? null : (
       <div className="callsPage__callsTimetable__info">
         {
-          data.callsInfo[0].infoDay === undefined ?
+          data.callsInfo[0].infoDay === undefined || data.callsInfo[0].infoDay === '-' ?
           <div className="callsPage__callsTimetable__info-day"><h1>Расписание</h1></div> : 
           <div className="callsPage__callsTimetable__info-day"><h1>{data.callsInfo[0].infoDay}</h1></div>
         }
@@ -74,7 +74,6 @@ const CallsPage = () => {
 
   return (
     <div className="callsPage-wrapper">
-      
       <div className={`callsPage__callsTimetable-wrapper ${callsTable === '' ? 'callsPage-loading-wrapper' : null}`}>
         {callsInfo === null ? null : callsInfo}
         {callsTable === '' ? loader() : callsTable}

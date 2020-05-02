@@ -14,9 +14,6 @@ const EntryPage = (props) => {
   const [ isFetching, setIsFetching ] = useState(false);
 
   useEffect(() => {
-    // if (localStorage.getItem('currentGroup') !== null) {
-    //   return <Redirect to='/class-timetable'/>
-    // }
     setIsFetching(true);
   }, []);
 
@@ -56,23 +53,25 @@ const EntryPage = (props) => {
   return (
     <div className="entryPage-wrapper">
       {localStorage.getItem('currentGroup') !== null && <Redirect to='/class-timetable'/>}
-      {isFetching ? loader() :
-       <div className="form-wrapper">
-        <form>
-          <p>Выберите группу:</p>
-          <div className="entryPage-groups-wrapper">
-            {
-              groups !== 'Группы' && groups.map((group, i) => (
-                <label key={i+200}>
-                  {group}
-                  <input key={i} checked={selectedGroup === group} onChange={handeCurrentGroupChange} value={group} type="radio" name="Group" />
-                  <span className="checkmark"></span>
-                </label>
-              ))
-            }
-          </div>
-          <button className="submit-btn" disabled={submitDisabled} type="submit" onClick={(e) => handleSubmit(e)}>Выбрать</button>
-        </form>
+      {isFetching ? loader() : 
+      <div className="entryPage-content-wrapper">
+        <h1>Выберите группу</h1>
+        <div className="form-wrapper">
+          <form>
+            <div className="entryPage-groups-wrapper">
+              {
+                groups !== 'Группы' && groups.map((group, i) => (
+                  <label key={i+200}>
+                    {group}
+                    <input key={i} checked={selectedGroup === group} onChange={handeCurrentGroupChange} value={group} type="radio" name="Group" />
+                    <span className="checkmark"></span>
+                  </label>
+                ))
+              }
+            </div>
+            <button className="submit-btn" disabled={submitDisabled} type="submit" onClick={(e) => handleSubmit(e)}>Выбрать</button>
+          </form>
+        </div>
       </div>}
       {<div className={`snackbar ${errorMessageClass}`}>Выберите группу</div>}
     </div>
