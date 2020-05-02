@@ -43,7 +43,7 @@ const PageContainer = (props) => {
       <Header title={title}/> 
       <div className="main-content-wrapper">
         <Sidebar />
-        <Suspense fallback={<div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>}>
+        <Suspense fallback={''}>
           <div className="main">
             {localStorage.getItem('currentGroup') === null && <Redirect to='/'/>}
             <Route exact path='/' render={(props) => <EntryPage {...props} />} />

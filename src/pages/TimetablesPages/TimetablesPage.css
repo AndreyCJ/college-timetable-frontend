@@ -3,10 +3,11 @@
     letter-spacing: 1px;
     font-size: 0.8rem;
     width: 100%;
+    height: 100%;  
+    /* max-height: 100%; */
     table-layout: fixed;
     flex: 1;
     align-self: stretch;
-    height: 100%;
 }
 
 .timetables-page td, .timetables-page th {
@@ -26,11 +27,6 @@
 
 .timetables-page td {
     text-align: center;
-    /* box-shadow:0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048); */
-}
-
-.timetables-page tbody tr td {
-    height: 80px !important ;
 }
 
 .timetables-page {
@@ -43,14 +39,15 @@
     flex: 1;
     height: 100%;
     max-height: 100%;
+    overflow-y: hidden;
 }
 
 .number {
     padding: 0 !important;
     margin: 0;
-    width: 30px;
+    width: 20px;
     background: #F8F8F8;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .fake-col-num {
@@ -60,8 +57,6 @@
 }
 
 .fake-col {
-    /* border: none; */
-
     z-index: -1;
     border-bottom: none !important;
     /* display: none; */
@@ -69,17 +64,17 @@
 
 .fake-row {
     /* border: none; */
-
     height: 100% !important;
     /* display: none; */
-
+    overflow: hidden;
 }
 
 .timetables-page__lesson {
     padding: 0;
     width: 100%;
-    min-height: calc(20vh - 95px); 
-    height: 100%;
+    height: auto;
+    /* min-height: calc(20vh - 95px);  */
+    /* height: 100%; */
     /* min-height: 400px; */
     background: rgba(225, 235, 250, 0.208);
     text-align: center;
@@ -274,7 +269,7 @@ s-roller div:nth-child(3) {
 }
 
 @media (max-width: 900px) {
-  .timetables-page__lesson .className {
+  .timetables-page__lesson .className, .timetables-page__lesson .classTime{
     font-size: 0.7rem;
   }
 }

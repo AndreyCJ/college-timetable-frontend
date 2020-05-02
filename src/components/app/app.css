@@ -1,3 +1,20 @@
 .main-content-wrapper {
   display: flex;
+  min-height: calc(100vh - 55px);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+input,
+textarea,
+button,
+select,
+a,
+label {
+  -webkit-tap-highlight-color: transparent !important; /* for removing the highlight */
 }
