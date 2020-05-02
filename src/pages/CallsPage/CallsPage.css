@@ -113,7 +113,6 @@
 }
 
 .callsPage__callsTimetable__info-date {
-  font-size: 1.1rem;
   margin-bottom: 10px;
 }
 
@@ -171,6 +170,10 @@
     padding-top: 1rem;
   }
 
+  .callsPage__callsTimetable-table {
+    font-size: 0.9rem;
+  }
+
   .callsPage__callsTimetable-table td{
     padding: 10px;
   }
@@ -179,16 +182,18 @@
     margin: 0px;
   }
 
-  .callsPage__callsTimetable__info-credentialsWrapper div{
-    font-size: 0.9rem;
-  }
+
 
   .callsPage__callsTimetable__info {
     padding: 0px;
   }
 
   .callsPage__callsTimetable__info-day {
-    font-size: 1.2rem;
+    font-size: 1rem;
+  }
+
+  .callsPage__callsTimetable-shiftNum {
+    font-size: 1.1rem;
   }
 }
 

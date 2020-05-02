@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Logo from '../../assets/logo-svg.svg';
 
@@ -22,22 +22,22 @@ const MobileMenu = props => {
                 </div>
                 <ul className="mobileMenu-ul">
                   <li className='headerNavItem__mobile'>
-                    <Link
+                    <NavLink
                       to="/class-timetable"
+                      activeClassName="mobilelink-active"
                       className="nav-link"
-                      // style={path === '/' ? {color: about} : {color: portfolio}}
                     >
                       Расписание уроков
-                    </Link>
+                    </NavLink>
                   </li>
                   <li className='headerNavItem__mobile'>
-                    <Link
+                    <NavLink
                       to="/calls"
                       className="nav-link"
-                      // style={path === '/' ? {color: about} : {color: portfolio}}
+                      activeClassName="mobilelink-active"
                     >
                       Расписание звонков
-                    </Link>
+                    </NavLink>
                   </li>
                   <li className='headerNavItem__mobile toolbar__item'>
                     {props.weeks}
@@ -46,11 +46,9 @@ const MobileMenu = props => {
                     {props.groups}
                   </li>
                 </ul>
-                {/* <div className="header-tooltip">
-                </div> */}
             </nav>
         </div>
     );   
 };
 
-export default withRouter(MobileMenu);
+export default MobileMenu;

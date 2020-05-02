@@ -45,9 +45,9 @@
   align-items: center;
   width: 100%;
   max-width: 400px;
-  padding: 45px 15px;
-  background: rgba(225, 235, 250, 0.208);
-  border: 2px solid rgba(214, 214, 214, 0.555);
+  padding: 1rem 0px;
+  /* background: rgba(225, 235, 250, 0.208); */
+  /* border: 2px solid rgba(214, 214, 214, 0.555); */
   flex-direction: column;
   border-radius: .5rem;
   color: #333333;
@@ -56,7 +56,10 @@
 .entryPage-wrapper form {
   max-width: 300px;
   width: 100%;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
 }
 
 .entryPage-groups-wrapper label {
@@ -131,8 +134,7 @@
   align-items: center;
   font-size: 0.9rem;
   color: #4b5fd3;
-  display: block;
-  padding: .4rem .5rem;
+  padding: .4rem;
   border: 2px solid #4b5fd3;
   border-radius: .5rem;
   background: transparent;
@@ -206,7 +208,7 @@
 
 @media (max-width: 425px) {
   .entryPage-content-wrapper h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .entryPage-groups-wrapper label {

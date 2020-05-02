@@ -65,9 +65,8 @@
     font-weight: 600;
 }
 
-.mobileMenu a:hover,
-.mobileMenu a:active {
-    color: rgb(75, 95, 211);;
+.mobilelink-active {
+  color: rgb(75, 95, 211) !important;
 }
 
 .mobileLogo {
