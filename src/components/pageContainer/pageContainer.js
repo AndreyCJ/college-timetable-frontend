@@ -6,6 +6,7 @@ import Sidebar from '../sidebar/Sidebar';
 const TimetablesPage = lazy(() => import('../../pages/TimetablesPages/TimetablesPage'));
 const CallsPage = lazy(() => import('../../pages/CallsPage/CallsPage'));
 const EntryPage = lazy(() => import('../../pages/EntryPage/EntryPage'));
+const AdminPage = lazy(() => import('../../pages/AdminPage/AdminPage'));
 
 const PageContainer = (props) => {
   const [pages] = useState([
@@ -49,6 +50,7 @@ const PageContainer = (props) => {
             <Route exact path='/' render={(props) => <EntryPage {...props} />} />
             <Route exact path='/class-timetable' render={(props) => <TimetablesPage {...props} />} />
             <Route exact path='/calls' render={(props) => <CallsPage {...props} />} />
+            <Route exact path='/admin' render={(props) => <AdminPage {...props} />} />
           </div>
         </Suspense>
       </div>
