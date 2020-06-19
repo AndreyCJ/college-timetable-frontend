@@ -5,7 +5,7 @@ import useGroupContext from '../../hooks/useGroupContext';
 import useWeekContext from '../../hooks/useWeekContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
 
 const ClassTimetable = (props) => {
   const [data, setData] = useState({ classes: [], isFetching: true });
@@ -80,7 +80,7 @@ const ClassTimetable = (props) => {
                     <div>
                       <div className="lesson-text">{lesson[0]}</div>
                       <div className="lesson-additional">
-                        <div className="lesson-teacher">{lesson[3]}</div>
+                        <div className="lesson-teacher"><FontAwesomeIcon icon={faChalkboardTeacher}/>{lesson[3]}</div>
                         {
                           typeof(lesson[1]) !== 'undefined' &&
                           <div className="classTime"><FontAwesomeIcon icon={faBell}/>{lesson[1]}, каб. №{lesson[2]}</div>

@@ -21,6 +21,7 @@ const CallsPage = () => {
       setCallsTable(<div className="blank-timetable"><span>Расписания нет...</span></div>);
     } else {
       const callsArr = data.calls.map(callsTimetable => callsTimetable.CallsArr);
+      console.log(callsArr)
       const table = data.calls.map((call, i) => {
         return (
           <div className="callsPage__callsTimetable__item" key={i+1200}>
@@ -30,7 +31,7 @@ const CallsPage = () => {
                 callsArr[i].map((call, i) => {
                   return (
                     <tr key={i-1}>
-                      <td className="callsPage__callsTimetable-table-call__class" key={i+10000}>{call.name}</td>
+                      <td className="callsPage__callsTimetable-table-call__class" key={i+10000}>{call.className}</td>
                       <td className="callsPage__callsTimetable-table-call__time" key={i+100}>{call.time}</td>
                     </tr>
                   );
